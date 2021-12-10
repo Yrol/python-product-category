@@ -1,4 +1,12 @@
 export default {
+
+  mode: "universal",
+  /*
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
+   */
+  target: "server",
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'python-project',
@@ -14,6 +22,11 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  },
+
+  loading: {
+    color: '#f66d9b',
+    height: '6px'
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -35,7 +48,19 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/axios",
+    '@nuxtjs/proxy'
   ],
+
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    "/api/": {
+      target: "http://localhost:8000/api",
+      pathRewrite: { "^/api/": "" }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

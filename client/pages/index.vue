@@ -16,6 +16,7 @@
               icon="sign-in-alt"
               size="small"
               width="full"
+              @click="goToProducts()"
             >
               Products
             </Button>
@@ -28,6 +29,7 @@
               icon="sign-in-alt"
               size="small"
               width="full"
+              @click="goToCategories()"
             >
               Categories
             </Button>
@@ -42,6 +44,22 @@ import Button from "~/components/Button";
 export default {
   head: {
     title: "Python App",
+  },
+  components: {
+    Button,
+  },
+  methods: {
+    goToProducts() {
+      this.$router.push({
+        name: "products",
+      });
+    },
+
+    goToCategories() {
+      this.$router.push({
+        name: "categories",
+      });
+    },
   },
 };
 </script>

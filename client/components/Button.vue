@@ -9,13 +9,6 @@
     :size="size"
     :href="to"
   >
-    <span>
-      <font-awesome-icon
-        v-if="icon"
-        :icon="['fas', icon]"
-        class="fa-fw fa-lg mr-1"
-      />
-    </span>
     <slot />
   </component>
 </template>

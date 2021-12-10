@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = '/api';
 
 const responseBody = (response) => response.data;
 
@@ -19,10 +19,15 @@ const Products = {
   delete: (id) => requests.del(`/product/${id}`),
 }
 
-const Category = {
+const Categories = {
   all: () => requests.get(`/category`),
   details: (id) => requests.get(`/category/${id}`),
   create: (post) => requests.post('/category', post),
   update: (id) => requests.put(`/category/${id}`, post),
   delete: (id) => requests.del(`/category/${id}`),
+}
+
+export default{
+  Products,
+  Categories
 }
