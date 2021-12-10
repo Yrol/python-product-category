@@ -12,11 +12,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in products" :key="`${index}`">
-              <td class="p-4">{{ item.name }}</td>
-              <td class="p-4">{{ item.description }}</td>
-              <td class="p-4">{{ item.category_name }}</td>
-              <td class="p-4">{{ item.url }}</td>
+            <tr v-for="(product, index) in products" :key="`${index}`">
+              <td class="p-4">{{ product.name }}</td>
+              <td class="p-4">{{ product.description }}</td>
+              <td class="p-4">{{ product.category_name }}</td>
+              <td class="p-4">{{ product.url }}</td>
             </tr>
           </tbody>
         </table>
