@@ -4,8 +4,6 @@ from datetime import datetime
 
 # Create your models here.
 class Category(models.Model):
-
-    id =  models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
 
@@ -14,8 +12,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     manufacturing_date = models.DateField(default=datetime.now)
