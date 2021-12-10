@@ -20,5 +20,5 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/category/', include('category.urls'))
+    path('api/', include('category.urls'), name='category-list')
 ]
