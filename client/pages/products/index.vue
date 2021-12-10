@@ -8,7 +8,8 @@
               <th class="p-4 text-green-700 text-left">Name</th>
               <th class="p-4 text-green-700 text-left">Description</th>
               <th class="p-4 text-green-700 text-left">Category Name</th>
-              <th class="p-4 text-green-700 text-left">Url</th>
+              <th class="p-4 text-green-700 text-left">Manufacture date</th>
+              <th class="p-4 text-green-700 text-left"></th>
             </tr>
           </thead>
           <tbody>
@@ -16,7 +17,8 @@
               <td class="p-4">{{ product.name }}</td>
               <td class="p-4">{{ product.description }}</td>
               <td class="p-4">{{ product.category_name }}</td>
-              <td class="p-4">{{ product.url }}</td>
+              <td class="p-4">{{ product.manufacturing_date }}</td>
+              <td class="p-4">Edit | Delete</td>
             </tr>
           </tbody>
         </table>
@@ -26,6 +28,7 @@
 </template>
 <script>
 import getProducts from "~/api/getProducts";
+import Button from "~/components/Button";
 export default {
   head: {
     title: "Products",
@@ -35,7 +38,9 @@ export default {
       products: [],
     };
   },
-  components: {},
+  components: {
+    Button,
+  },
   async asyncData({ $axios, store, app, params, error }) {
     return await getProducts($axios, store, params, error)
       .then((res) => {

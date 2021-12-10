@@ -6,8 +6,8 @@ export default async ($axios, store, params, error) => {
     throw error({ statusCode: 404, message: 'No Products found!' });
   }
 
-  // //storing pagination state
-  // store.dispatch('posts/allPosts',allPosts);
+  store.dispatch('products/products',allProducts);
+  store.dispatch('products/totalProducts',allProducts.length);
 
   return {
     allProducts

@@ -6,9 +6,6 @@ export default async ($axios, store, params, error) => {
     throw error({ statusCode: 404, message: 'No Categories found!' });
   }
 
-  // //storing pagination state
-  // store.dispatch('posts/allPosts',allPosts);
-
   return {
     allCategories
   }

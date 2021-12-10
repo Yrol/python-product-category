@@ -7,14 +7,14 @@
             <tr class="bg-gray-200">
               <th class="p-4 text-green-700 text-left">Name</th>
               <th class="p-4 text-green-700 text-left">Description</th>
-              <th class="p-4 text-green-700 text-left">Url</th>
+              <th class="p-4"></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(category, index) in categories" :key="`${index}`">
               <td class="p-4">{{ category.name }}</td>
               <td class="p-4">{{ category.description }}</td>
-              <td class="p-4">{{ category.url }}</td>
+              <td class="p-4">View Products | Edit | Delete</td>
             </tr>
           </tbody>
         </table>
