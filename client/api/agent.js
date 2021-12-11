@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-axios.defaults.baseURL = '/api'; //disabled due to cors issues
+axios.defaults.baseURL = '/api'
 
 const responseBody = (response) => response.data;
 
