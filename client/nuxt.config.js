@@ -50,6 +50,7 @@ export default {
   modules: [
     "@nuxtjs/axios",
     '@nuxtjs/proxy',
+    ['nuxt-tailvue', {toast: true}],
     [
       "nuxt-fontawesome",
       {
