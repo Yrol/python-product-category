@@ -30,6 +30,15 @@ export const mutations = {
   SET_TOTAL(state, payload){
     state.totalCategories = payload
   },
+
+  DELETE_CATEGORY(state, pk){
+    let categoryIndex = state.categories.findIndex(category => category.pk === pk)
+    state.categories.splice(categoryIndex, 1)
+
+    if(state.totalCategories > 0){
+      state.totalCategories--;
+    }
+  }
 }
 
 export const actions = {
@@ -43,6 +52,10 @@ export const actions = {
 
   saveCategory({commit}, payload){
     commit('SET_CATEGORY', payload);
+  },
+
+  deleteCategory({commit}, pk){
+    commit('DELETE_CATEGORY', pk);
   },
 
   clear({commit}){

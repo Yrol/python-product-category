@@ -32,7 +32,7 @@
                     :disableButton="false"
                     size="small"
                     icon="edit"
-                    @click="goToEdit()"
+                    @click="editProduct()"
                   />
                 </td>
                 <td class="p-4">
@@ -42,7 +42,7 @@
                     :disableButton="false"
                     size="small"
                     icon="trash-alt"
-                    @click="deleteProduct(postData.slug, postData.id)"
+                    @click="deleteProduct()"
                   />
                 </td>
               </tr>
@@ -77,6 +77,10 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    editProduct() {},
+    deleteProduct() {},
   },
   components: {
     Button,
