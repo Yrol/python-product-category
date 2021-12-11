@@ -7,6 +7,9 @@ export const getters = {
   allProducts:(state) => {
     return state.products
   },
+  totalProducts:(state) => {
+    return state.totalProducts
+  },
 }
 
 export const mutations = {

@@ -6,6 +6,9 @@ export default async ($axios, store, params, error) => {
     throw error({ statusCode: 404, message: 'No Categories found!' });
   }
 
+  store.dispatch('categories/categories',allCategories);
+  store.dispatch('categories/totalCategories',allCategories.length);
+
   return {
     allCategories
   }

@@ -4,7 +4,7 @@ from core.models import Category
 
 class ProductSerializer(serializers.ModelSerializer):
 
-    category_name = serializers.CharField(source='category.name')
+    category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = Product
