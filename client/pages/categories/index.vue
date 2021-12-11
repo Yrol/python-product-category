@@ -42,7 +42,7 @@
                     :disableButton="false"
                     size="small"
                     icon="edit"
-                    @click="goToEdit()"
+                    @click="editCategory()"
                   />
                 </td>
                 <td class="p-4">
@@ -52,7 +52,7 @@
                     :disableButton="false"
                     size="small"
                     icon="trash-alt"
-                    @click="deleteProduct(postData.slug, postData.id)"
+                    @click="deleteCategory()"
                   />
                 </td>
               </tr>
@@ -67,7 +67,103 @@
           </p>
         </div>
       </div>
+      <div class="flex flex-col w-1/4 mx-auto h-full p-4">
+        <Button
+          :variant="'success'"
+          :loading="false"
+          :disableButton="false"
+          icon="sign-in-alt"
+          size="small"
+          width="full"
+          @click="createCategoryModalOpen()"
+        >
+          Create category
+        </Button>
+      </div>
     </div>
+    <Modal
+      :visible="categoryModalStatus.addCategory"
+      @close="categoryModalStatus.addCategory = false"
+    >
+      <ValidationObserver ref="keyValueEditForm" v-slot="{ handleSubmit }">
+        <form @submit.prevent="handleSubmit(createCategoryAction)">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3
+                  class="text-lg leading-6 font-medium text-gray-900"
+                  id="modal-headline"
+                >
+                  Create new Category
+                </h3>
+
+                <div class="mt-2">
+                  <p class="text-sm leading-5 text-gray-500">
+                    This action will allow to create new category.
+                  </p>
+                  <p class="text-sm leading-5 text-gray-500"></p>
+                </div>
+
+                <div class="mt-2">
+                  <div class="min-w-full">
+                    <FormText
+                      rules="required"
+                      name="name"
+                      label="Category name"
+                      placeholder="Category name"
+                      class="my-4"
+                      icon="folder"
+                      v-model="categoryName"
+                    ></FormText>
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <div class="min-w-full">
+                    <FormText
+                      name="value"
+                      label="Category description"
+                      placeholder="Category description"
+                      class="my-4"
+                      icon="folder"
+                      v-model="categoryDescription"
+                    ></FormText>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+              <Button
+                variant="success"
+                :loading="modalSubmitting"
+                :disableButton="modalSubmitting ? true : false"
+                size="small"
+                width="full"
+              >
+                Create
+              </Button>
+            </span>
+
+            <span
+              class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto"
+            >
+              <Button
+                variant="white"
+                @click.native="categoryModalStatus.addCategory = false"
+                :disableButton="modalSubmitting ? true : false"
+                size="small"
+                width="full"
+              >
+                Cancel
+              </Button>
+            </span>
+          </div>
+        </form>
+      </ValidationObserver>
+    </Modal>
   </div>
 </template>
 <script>
@@ -75,6 +171,9 @@ import { mapGetters } from "vuex";
 import getCategories from "~/api/getCategories";
 import Button from "~/components/Button";
 import Header from "~/components/Header";
+import Modal from "~/components/Modal";
+import FormText from "~/components/FormText";
+import agent from "~/api/agent";
 export default {
   head: {
     title: "Categories",
@@ -86,11 +185,60 @@ export default {
     }),
   },
   data() {
-    return {};
+    return {
+      categoryModalStatus: {
+        addCategory: false,
+        editCategory: false,
+        deleteCategory: false,
+      },
+      modalSubmitting: false,
+      categoryName: "",
+      categoryDescription: "",
+    };
   },
   components: {
     Button,
     Header,
+    Modal,
+    FormText,
+  },
+  methods: {
+    createCategoryModalOpen() {
+      this.categoryModalStatus.addCategory = true;
+    },
+    async createCategoryAction() {
+      if (!this.categoryModalStatus.addCategory) {
+        return;
+      }
+
+      if (this.modalSubmitting) {
+        return;
+      }
+
+      this.modalSubmitting = true;
+
+      let formData = {
+        name: this.categoryName,
+        description: this.categoryDescription,
+      };
+
+      try {
+        const categoryCreate = await agent.Categories.create(formData);
+        this.$store.dispatch("categories/saveCategory", categoryCreate);
+        this.categoryModalStatus.addCategory = false;
+        this.clearModalData();
+      } catch (error) {
+      } finally {
+        this.modalSubmitting = false;
+      }
+    },
+    editCategory() {},
+    deleteCategory() {},
+    showProducts() {},
+    clearModalData() {
+      this.categoryName = "";
+      this.categoryDescription = "";
+    },
   },
   async asyncData({ $axios, store, app, params, error }) {
     return await getCategories($axios, store, params, error)

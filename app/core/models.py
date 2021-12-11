@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -12,7 +12,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
     manufacturing_date = models.DateField(default=datetime.now)
     price = models.CharField(max_length=255)
