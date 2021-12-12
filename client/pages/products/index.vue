@@ -124,6 +124,18 @@
 
                 <div class="mt-2">
                   <div class="min-w-full">
+                    <DatePicker
+                      v-model="manufactureDate"
+                      name="manufactureDate"
+                      rules="required"
+                      label="Manufacture Date"
+                      placeholder="01-01-1970"
+                    />
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <div class="min-w-full">
                     <FormText
                       name="value"
                       label="Product description"
@@ -256,11 +268,19 @@ import getProducts from "~/api/getProducts";
 import Button from "~/components/Button";
 import Header from "~/components/Header";
 import DropDown from "~/components/DropDown";
+import DatePicker from "~/components/DatePicker";
 import Modal from "~/components/Modal";
 import agent from "~/api/agent";
 export default {
   head: {
     title: "Products",
+  },
+  components: {
+    Button,
+    Header,
+    DropDown,
+    Modal,
+    DatePicker,
   },
   computed: {
     ...mapGetters({
@@ -283,6 +303,7 @@ export default {
       selectedProductCategory: "",
       deleteProductId: null,
       deleteProductName: null,
+      manufactureDate: "",
     };
   },
   methods: {
@@ -333,13 +354,11 @@ export default {
 
       this.modalSubmitting = true;
 
-      const manufacture_date = new Date();
-
       let formData = {
         name: this.productName,
         description: this.productDescription,
         category: Number(this.selectedProductCategory),
-        manufacturing_date: manufacture_date.toISOString().split("T")[0],
+        manufacturing_date: this.manufactureDate.toISOString().split("T")[0],
       };
 
       try {
@@ -364,13 +383,8 @@ export default {
     clearModalData() {
       this.productName = "";
       this.productDescription = "";
+      this.manufactureDate = "";
     },
-  },
-  components: {
-    Button,
-    Header,
-    DropDown,
-    Modal,
   },
   async asyncData({ $axios, store, app, params, error }) {
     return await getProducts($axios, store, params, error)

@@ -294,6 +294,12 @@ export default {
       totalCategories: "categories/totalCategories",
     }),
   },
+  components: {
+    Button,
+    Header,
+    Modal,
+    FormText,
+  },
   data() {
     return {
       categoryModalStatus: {
@@ -310,12 +316,6 @@ export default {
       currentCategory: null,
       categoryProducts: [],
     };
-  },
-  components: {
-    Button,
-    Header,
-    Modal,
-    FormText,
   },
   methods: {
     createCategoryModalOpen() {

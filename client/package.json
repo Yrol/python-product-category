@@ -16,6 +16,8 @@
     "@nuxtjs/proxy": "^2.1.0",
     "vee-validate": "^3.3.9",
     "nuxt-fontawesome": "^0.4.0",
+    "moment": "^2.29.1",
+    "vuejs-datepicker": "^1.6.2",
     "nuxt-tailvue": "^1.0.52",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
