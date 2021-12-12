@@ -210,7 +210,7 @@
             <div class="mt-2">
               <p class="text-sm leading-5 text-gray-500">
                 This action will permanently delete the Category :
-                {{ deleteCategoryName }}
+                {{ deleteCategoryName }}, and its products.
               </p>
             </div>
           </div>

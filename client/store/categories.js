@@ -15,8 +15,9 @@ export const getters = {
 export const mutations = {
   SET_CATEGORIES(state, payload){
 
+    state.categories = payload
+
     if (payload.length > 0 ) {
-      state.categories = payload
       sortCategories(state, payload);
     }
   },

@@ -15,8 +15,9 @@ export const getters = {
 export const mutations = {
   SET_PRODUCTS(state, payload){
 
+    state.products = payload;
+
     if (payload.length > 0 ) {
-      state.products = payload;
       sortProducts(state, state.products)
     }
   },
@@ -32,6 +33,15 @@ export const mutations = {
     state.totalProducts = payload
   },
 
+  DELETE_PRODUCT(state, pk){
+    let productIndex = state.products.findIndex(product => product.pk === pk)
+    state.products.splice(productIndex, 1)
+
+    if(state.totalProducts > 0){
+      state.totalProducts--;
+    }
+  }
+
 }
 
 export const actions = {
@@ -45,6 +55,10 @@ export const actions = {
 
   saveProduct({commit}, payload){
     commit('SET_PRODUCT', payload);
+  },
+
+  deleteProduct({commit}, pk){
+    commit('DELETE_PRODUCT', pk);
   },
 }
 
