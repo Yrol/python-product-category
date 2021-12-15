@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+import datetime
 
 
 # Create your models here.
@@ -13,9 +13,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(blank=True, null=True)
-    manufacturing_date = models.DateField(default=datetime.now)
-    price = models.CharField(max_length=255)
+    manufacturing_date = models.DateField(default=datetime.date.today)
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
 
     def __str__(self):

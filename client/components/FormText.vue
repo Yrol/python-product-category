@@ -32,6 +32,7 @@
         :type="type"
         :name="name"
         :id="name"
+        :step="step"
         v-model="proxy"
         :placeholder="placeholder"
         class="form-input block w-full h-12 py-3 px-2 sm:text-sm sm:leading-5"
@@ -91,6 +92,7 @@ export default {
       type: String,
       default: "text",
     },
+    step: String,
     icon: String,
     label: String,
     placeholder: String,

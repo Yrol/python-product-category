@@ -9,6 +9,7 @@
               <tr class="bg-gray-200">
                 <th class="p-4 text-green-700 text-left">Name</th>
                 <th class="p-4 text-green-700 text-left">Description</th>
+                <th class="p-4 text-green-700 text-left">Price</th>
                 <th class="p-4 text-green-700 text-left">Category Name</th>
                 <th class="p-4 text-green-700 text-left">Manufacture date</th>
                 <th class="p-4"></th>
@@ -23,6 +24,7 @@
               >
                 <td class="p-4">{{ product.name }}</td>
                 <td class="p-4">{{ product.description }}</td>
+                <td class="p-4">${{ product.price }}</td>
                 <td class="p-4">{{ product.category_name }}</td>
                 <td class="p-4">{{ product.manufacturing_date }}</td>
                 <td class="p-4">
@@ -118,6 +120,22 @@
                       class="my-4"
                       icon="folder"
                       v-model="productName"
+                    ></FormText>
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <div class="min-w-full">
+                    <FormText
+                      rules="required"
+                      name="price"
+                      label="Price"
+                      type="number"
+                      step=".01"
+                      placeholder="Price"
+                      class="my-4"
+                      icon="dollar-sign"
+                      v-model="price"
                     ></FormText>
                   </div>
                 </div>
@@ -304,6 +322,7 @@ export default {
       deleteProductId: null,
       deleteProductName: null,
       manufactureDate: "",
+      price: null,
     };
   },
   methods: {
@@ -359,6 +378,7 @@ export default {
         description: this.productDescription,
         category: Number(this.selectedProductCategory),
         manufacturing_date: this.manufactureDate.toISOString().split("T")[0],
+        price: this.price,
       };
 
       try {
@@ -384,6 +404,7 @@ export default {
       this.productName = "";
       this.productDescription = "";
       this.manufactureDate = "";
+      this.price = null;
     },
   },
   async asyncData({ $axios, store, app, params, error }) {
